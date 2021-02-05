@@ -7,6 +7,29 @@
         mc:Ignorable="d"
         Title="Tile Set Splitter" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="149*"/>
+            <ColumnDefinition Width="643*" />
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="ImportButton" Content="Import" HorizontalAlignment="Left" Margin="28,29,0,0" VerticalAlignment="Top" Width="100" Click="ImportButtonClick" Height="30"/>
+        <Button x:Name="ExportButton" Content="Export" HorizontalAlignment="Left" Margin="28,77,0,0" VerticalAlignment="Top" Width="100" Click="ExportButtonClick" Height="30"/>
+
+        <Image x:Name="TileSetPicture" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,10,10,10"/>
+
+        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Width" VerticalAlignment="Top" Margin="10,220,0,0"  FontSize="14" Grid.Row="0" Grid.Column="0"/>
+        <TextBox x:Name="SpriteWidth" HorizontalAlignment="Left" Height="20" Margin="60,220,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" Grid.Row="0" Grid.Column="0" />
+
+        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Height" VerticalAlignment="Top" Margin="10,250,0,0"  FontSize="14" Grid.Row="0" Grid.Column="0"/>
+        <TextBox x:Name="SpriteHeight" HorizontalAlignment="Left" Height="20" Margin="60,250,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" Grid.Row="0" Grid.Column="0" />
+     
+        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="OffsetX" VerticalAlignment="Top" Margin="10,280,0,0"  FontSize="14" Grid.Row="0" Grid.Column="0"/>
+        <TextBox x:Name="OffsetX" HorizontalAlignment="Left" Height="20" Margin="60,280,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" Grid.Row="0" Grid.Column="0" />
+
+        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="OffsetY" VerticalAlignment="Top" Margin="10,310,0,0"  FontSize="14" Grid.Row="0" Grid.Column="0"/>
+        <TextBox x:Name="OffsetY" HorizontalAlignment="Left" Height="20" Margin="60,310,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" Grid.Row="0" Grid.Column="0" />
+
+        <Button x:Name="ApplyButton" Content="Apply" HorizontalAlignment="Left" Margin="10,346,0,0" VerticalAlignment="Top" Width="100" Click="ApplyButtonClick" Height="30"/>
     </Grid>
+
 </Window>
