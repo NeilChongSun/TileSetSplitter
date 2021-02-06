@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Media.Imaging;
+using System.Windows.Controls;
 namespace TileSetSplitter
 {
     class Sprite
     {
-        public int index;
-        public bool isSelected;
-
-        public double width;
-        public double height;
+        public CroppedBitmap bitSprite;
     }
 }

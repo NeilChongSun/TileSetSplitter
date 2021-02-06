@@ -23,7 +23,8 @@ namespace TileSetSplitter
     public partial class MainWindow : Window
     {
         private TileSet tileSet = new TileSet();
-
+        private Image preViewImage = new Image();
+        private Cropper cropper = new Cropper();
 
         public MainWindow()
         {
@@ -33,20 +34,28 @@ namespace TileSetSplitter
         private void ImportButtonClick(object sender, RoutedEventArgs e)
         {
             tileSet.ImportTileSet();
-            TileSetPicture.Source = tileSet.bitmap;
+            Canvas.Width = tileSet.width;
+            Canvas.Height = tileSet.height;                     
+            preViewImage.Source = tileSet.bitmap;
+            Canvas.Children.Add(preViewImage);
         }
 
         private void ExportButtonClick(object sender, RoutedEventArgs e)
         {
-
+            cropper.ExportSprites();
         }
 
         private void ApplyButtonClick(object sender, RoutedEventArgs e)
-        {
-            
+        {            
+            cropper.ApplyValue(tileSet,SpriteWidth.Text, SpriteHeight.Text,OffsetX.Text,OffsetY.Text);
+            Canvas.Children.Clear();
+            Canvas.Children.Add(preViewImage);
+            cropper.DrawCropLine(ref Canvas);
+        }
 
-            Cropper cropper = new Cropper();
-            cropper.Apply(tileSet, SpriteWidth.Text, SpriteHeight.Text,OffsetX.Text,OffsetY.Text);
+        private void SplitButtonClick(object sender, RoutedEventArgs e)
+        {
+            cropper.Crop(tileSet);
         }
     }
 }
