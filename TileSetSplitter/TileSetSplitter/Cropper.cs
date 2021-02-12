@@ -15,13 +15,16 @@ namespace TileSetSplitter
 {
     class Cropper
     {
-        public int columns;
-        public int rows;
+        private int columns;
+        private int rows;
 
-        public int spriteWidth;
-        public int spriteHeight;
+        private int spriteWidth;
+        private int spriteHeight;
 
-        public List<CroppedBitmap> croppedBitmaps=new List<CroppedBitmap>();
+        private int offsetX;
+        private int offsetY;
+
+        public List<CroppedBitmap> croppedBitmaps = new List<CroppedBitmap>();
 
         public void Crop(TileSet tileSet)
         {
@@ -30,7 +33,7 @@ namespace TileSetSplitter
             {
                 for (int x = 0; x < columns; x++)
                 {
-                    CroppedBitmap croppedBitmap = new CroppedBitmap(tileSet.bitmap, new Int32Rect(x*spriteWidth, y*spriteHeight, spriteWidth, spriteHeight));
+                    CroppedBitmap croppedBitmap = new CroppedBitmap(tileSet.bitmap, new Int32Rect(x * spriteWidth + offsetX, y * spriteHeight + offsetY, spriteWidth, spriteHeight));
                     croppedBitmaps.Add(croppedBitmap);
                 }
             }
@@ -46,10 +49,10 @@ namespace TileSetSplitter
                 verticalLine.StrokeThickness = 1;
                 verticalLine.Stroke = Brushes.Red;
 
-                verticalLine.X1 = 0;
-                verticalLine.Y1 = row * spriteHeight;
-                verticalLine.X2 = columns * spriteWidth;
-                verticalLine.Y2 = row * spriteHeight;
+                verticalLine.X1 = 0 + offsetX;
+                verticalLine.Y1 = row * spriteHeight + offsetY;
+                verticalLine.X2 = columns * spriteWidth + offsetX;
+                verticalLine.Y2 = row * spriteHeight + offsetY;
 
                 canvas.Children.Add(verticalLine);
             }
@@ -61,10 +64,10 @@ namespace TileSetSplitter
                 horizontalLine.StrokeThickness = 1;
                 horizontalLine.Stroke = Brushes.Red;
 
-                horizontalLine.X1 = column * spriteWidth;
-                horizontalLine.Y1 = 0;
-                horizontalLine.X2 = column * spriteWidth;
-                horizontalLine.Y2 = rows * spriteWidth;
+                horizontalLine.X1 = column * spriteWidth + offsetX;
+                horizontalLine.Y1 = 0 + offsetY;
+                horizontalLine.X2 = column * spriteWidth + offsetX;
+                horizontalLine.Y2 = rows * spriteWidth + offsetY;
 
                 canvas.Children.Add(horizontalLine);
             }
@@ -75,11 +78,11 @@ namespace TileSetSplitter
             spriteWidth = Int32.Parse(inputWidth);
             spriteHeight = Int32.Parse(inputHeight);
 
-            int offsetX = Int32.Parse(inputOffsetX);
-            int offsetY = Int32.Parse(inputOffsetY);
+            offsetX = Int32.Parse(inputOffsetX);
+            offsetY = Int32.Parse(inputOffsetY);
 
-            columns = (int)(tileSet.width / spriteWidth);
-            rows = (int)(tileSet.height / spriteWidth);
+            columns = (int)((tileSet.width - offsetX) / spriteWidth);
+            rows = (int)((tileSet.height - offsetY) / spriteWidth);
         }
 
         public void ExportSprites()
@@ -90,16 +93,16 @@ namespace TileSetSplitter
 
             SaveFileDialog fileDialog = new SaveFileDialog();
             fileDialog.Filter = "Image Files|*.png";
-            if (fileDialog.ShowDialog()==DialogResult.OK)
+            if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 for (int i = 0; i < croppedBitmaps.Count; i++)
                 {
-                    FileStream stream = new FileStream(fileDialog.FileName+"_"+i.ToString()+".png", FileMode.CreateNew);
+                    FileStream stream = new FileStream(fileDialog.FileName + "_" + i.ToString() + ".png", FileMode.CreateNew);
                     PngBitmapEncoder encoder = new PngBitmapEncoder();
                     encoder.Frames.Add(BitmapFrame.Create(croppedBitmaps[i]));
                     encoder.Save(stream);
                     stream.Close();
-                }            
+                }
             }
             System.Windows.MessageBox.Show("Done");
         }

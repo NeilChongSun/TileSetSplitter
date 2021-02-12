@@ -57,5 +57,7 @@ namespace TileSetSplitter
         {
             cropper.Crop(tileSet);
         }
+
     }
+
 }
