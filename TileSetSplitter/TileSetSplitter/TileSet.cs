@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace TileSetSplitter
 {
-    class TileSet
+    public class TileSet
     {
         private string path;
         public double height;

@@ -13,18 +13,19 @@ using System.IO;
 
 namespace TileSetSplitter
 {
-    class Cropper
+    public class Cropper
     {
-        private int columns;
-        private int rows;
+        public int columns;
+        public int rows;
 
-        private int spriteWidth;
-        private int spriteHeight;
-
+        public int spriteWidth;
+        public int spriteHeight;
+        
         private int offsetX;
         private int offsetY;
 
         public List<CroppedBitmap> croppedBitmaps = new List<CroppedBitmap>();
+        public List<ImageSource> selectedImages = new List<ImageSource>();
 
         public void Crop(TileSet tileSet)
         {
@@ -37,7 +38,6 @@ namespace TileSetSplitter
                     croppedBitmaps.Add(croppedBitmap);
                 }
             }
-            System.Windows.MessageBox.Show("Done");
         }
 
         public void DrawCropLine(ref Canvas canvas)
@@ -53,7 +53,7 @@ namespace TileSetSplitter
                 verticalLine.Y1 = row * spriteHeight + offsetY;
                 verticalLine.X2 = columns * spriteWidth + offsetX;
                 verticalLine.Y2 = row * spriteHeight + offsetY;
-
+                
                 canvas.Children.Add(verticalLine);
             }
 
@@ -87,15 +87,11 @@ namespace TileSetSplitter
 
         public void ExportSprites()
         {
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-
-
-
             SaveFileDialog fileDialog = new SaveFileDialog();
             fileDialog.Filter = "Image Files|*.png";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                for (int i = 0; i < croppedBitmaps.Count; i++)
+                for (int i = 0; i < selectedImages.Count; i++)
                 {
                     FileStream stream = new FileStream(fileDialog.FileName + "_" + i.ToString() + ".png", FileMode.CreateNew);
                     PngBitmapEncoder encoder = new PngBitmapEncoder();
@@ -106,7 +102,5 @@ namespace TileSetSplitter
             }
             System.Windows.MessageBox.Show("Done");
         }
-
-
     }//end class Cropper
 }

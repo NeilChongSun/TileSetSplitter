@@ -25,7 +25,6 @@ namespace TileSetSplitter
         private TileSet tileSet = new TileSet();
         private Image preViewImage = new Image();
         private Cropper cropper = new Cropper();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -40,11 +39,6 @@ namespace TileSetSplitter
             Canvas.Children.Add(preViewImage);
         }
 
-        private void ExportButtonClick(object sender, RoutedEventArgs e)
-        {
-            cropper.ExportSprites();
-        }
-
         private void ApplyButtonClick(object sender, RoutedEventArgs e)
         {            
             cropper.ApplyValue(tileSet,SpriteWidth.Text, SpriteHeight.Text,OffsetX.Text,OffsetY.Text);
@@ -56,6 +50,8 @@ namespace TileSetSplitter
         private void SplitButtonClick(object sender, RoutedEventArgs e)
         {
             cropper.Crop(tileSet);
+            SubWindow subWindow = new SubWindow(ref cropper);
+            subWindow.Show();
         }
 
     }

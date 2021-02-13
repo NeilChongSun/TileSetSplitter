@@ -13,7 +13,6 @@
         </Grid.ColumnDefinitions>
 
         <Button x:Name="ImportButton" Content="Import" HorizontalAlignment="Left" Margin="28,29,0,0" VerticalAlignment="Top" Width="100" Click="ImportButtonClick" Height="30"/>
-        <Button x:Name="ExportButton" Content="Export" HorizontalAlignment="Left" Margin="28,77,0,0" VerticalAlignment="Top" Width="100" Click="ExportButtonClick" Height="30"/>
 
         <Canvas x:Name="Canvas" Grid.Column="1" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,10" Background="LightGray" />
 
