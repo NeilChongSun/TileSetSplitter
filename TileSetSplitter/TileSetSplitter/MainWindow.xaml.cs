@@ -50,7 +50,7 @@ namespace TileSetSplitter
         private void SplitButtonClick(object sender, RoutedEventArgs e)
         {
             cropper.Crop(tileSet);
-            SubWindow subWindow = new SubWindow(ref cropper);
+            SubWindow subWindow = new SubWindow(cropper);
             subWindow.Show();
         }
 

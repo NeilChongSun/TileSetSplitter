@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Forms;
 using System.IO;
+using System.Windows.Controls.Primitives;
 
 namespace TileSetSplitter
 {
@@ -102,5 +103,5 @@ namespace TileSetSplitter
             }
             System.Windows.MessageBox.Show("Done");
         }
-    }//end class Cropper
+    }
 }

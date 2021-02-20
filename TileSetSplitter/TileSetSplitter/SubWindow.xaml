@@ -18,8 +18,17 @@
         </Grid.ColumnDefinitions>
 
         <UniformGrid Name="Sprites" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Margin="10,10,10,10" Background="LightGray" ></UniformGrid>
-        <UniformGrid Name="SelectedSprites" Grid.Row="0" Grid.Column="1" Margin="10,10,10,10" VerticalAlignment="Top" HorizontalAlignment="Left" Background="LightGray"></UniformGrid>
-        <Button x:Name="ExportSpritesButton" Grid.Row="1" Content="Export Sprites" Click="ExportSpritesButtonClick" Margin="140,14,141,14"/>
+        <UniformGrid Name="SelectedSprites" Grid.Row="0" Grid.Column="1" Margin="10,10,10,10" VerticalAlignment="Top" HorizontalAlignment="Left" Columns="2" Background="LightGray"></UniformGrid>
+        <Button x:Name="ExportSpritesButton" Grid.Row="1" Content="Export Sprites" Click="ExportSpritesButtonClick" Margin="285,5,0,0" Width="85" Height="20" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="ExportTileSetButton" Content="Export Tile Set" Click="ExportTileSetButtonClick" Margin="285,30,0,0"  Grid.Column="1" Width="85" Height="20" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <TextBlock  HorizontalAlignment="Right" TextWrapping="Wrap" Text="Columns" VerticalAlignment="Top" Margin="0,20,348,0"  FontSize="14" Grid.Row="1" Grid.Column="1"/>
+        <TextBox x:Name="InputColumns" HorizontalAlignment="Right" Height="20" Margin="0,20,303,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top" Width="40" Grid.Row="1" Grid.Column="1" RenderTransformOrigin="1.325,0.4" />
+
+        <Button x:Name="ApplyButton" Grid.Row="1" Content="Apply" Click="ApplyButtonClick" Margin="0,20,204,0"  Width="75" Height="20" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+
+        <Button Content="Select All" HorizontalAlignment="Left" Margin="185,19,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="SelectAllButtonClick"/>
+        <Button Content="Remove All" HorizontalAlignment="Left" Margin="285,19,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="RemoveAllButtonClick"/>
 
     </Grid>
 </Window>
