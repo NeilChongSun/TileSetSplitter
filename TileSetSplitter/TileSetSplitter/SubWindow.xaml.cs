@@ -42,7 +42,7 @@ namespace TileSetSplitter
                 image.Source = croppedBitmap;
                 image.Width = croppedBitmap.Width;
                 image.Height = croppedBitmap.Height;
-                image.Margin = new Thickness(0.1, 0.1, 0.1, 0.1);
+                image.Margin = new Thickness(0.5, 0.5, 0.5, 0.5);
                 image.MouseDown += new MouseButtonEventHandler(SelectSpriteClick);
                 Sprites.Children.Add(image);
             }

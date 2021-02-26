@@ -19,6 +19,7 @@ namespace TileSetSplitter
 
         public void ImportTileSet()
         {
+            bitmap = new BitmapImage();
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "Image Files|*.png";
 

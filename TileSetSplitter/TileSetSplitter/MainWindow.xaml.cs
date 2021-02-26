@@ -33,18 +33,28 @@ namespace TileSetSplitter
         private void ImportButtonClick(object sender, RoutedEventArgs e)
         {
             tileSet.ImportTileSet();
+
+            double width = tileSet.width;
+            double height = tileSet.height;
+
             Canvas.Width = tileSet.width;
-            Canvas.Height = tileSet.height;                     
+            TileSetWidthInfo.Text = "Image Width: " + (int)width;
+            OffsetXSlider.Maximum = (int)width;
+            Canvas.Height = height;
+            TileSetHeightInfo.Text = "Image Height: " + (int)width;
+            OffsetYSlider.Maximum = (int)height;
             preViewImage.Source = tileSet.bitmap;
             Canvas.Children.Add(preViewImage);
         }
 
         private void ApplyButtonClick(object sender, RoutedEventArgs e)
-        {            
-            cropper.ApplyValue(tileSet,SpriteWidth.Text, SpriteHeight.Text,OffsetX.Text,OffsetY.Text);
-            Canvas.Children.Clear();
-            Canvas.Children.Add(preViewImage);
-            cropper.DrawCropLine(ref Canvas);
+        {
+            ApplyValue();
+        }
+
+        private void OffsetValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ApplyValue();
         }
 
         private void SplitButtonClick(object sender, RoutedEventArgs e)
@@ -54,6 +64,28 @@ namespace TileSetSplitter
             subWindow.Show();
         }
 
+        private void NewButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //Reset all data
+        private void Reset()
+        {
+
+        }
+
+        //Apply all input values: sprite height, sprite width, offsetX, offsetY
+        private void ApplyValue()
+        {
+            cropper.ApplyValue(tileSet, SpriteWidth.Text, SpriteHeight.Text, OffsetX.Text, OffsetY.Text);
+            RowInfo.Text = "Rows: " + cropper.rows;
+            ColumnInfo.Text = "Columns: " + cropper.columns;
+            SpritesCountInfo.Text = "Count: " + (cropper.rows * cropper.columns);
+            Canvas.Children.Clear();
+            Canvas.Children.Add(preViewImage);
+            cropper.DrawCropLine(ref Canvas);
+        }
     }
 
 }

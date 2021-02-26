@@ -11,25 +11,34 @@
             <ColumnDefinition Width="149*"/>
             <ColumnDefinition Width="643*" />
         </Grid.ColumnDefinitions>
+        <Button x:Name="ImportButton" Content="Import" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Width="90" Click="ImportButtonClick" Height="25"/>
 
-        <Button x:Name="ImportButton" Content="Import" HorizontalAlignment="Left" Margin="28,29,0,0" VerticalAlignment="Top" Width="100" Click="ImportButtonClick" Height="30"/>
+        <TextBlock x:Name="TileSetWidthInfo" Text="Image Width: 0" HorizontalAlignment="Left" Margin="17,50,0,0" VerticalAlignment="Top" Foreground="#FF6E6E6E"/>
+        <TextBlock x:Name="TileSetHeightInfo" Text="Image Height: 0" HorizontalAlignment="Left" Margin="17,71,0,0" VerticalAlignment="Top" Foreground="#FF6E6E6E"/>
 
         <Canvas x:Name="Canvas" Grid.Column="1" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,10" Background="LightGray" />
 
-        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Width" VerticalAlignment="Top" Margin="30,180,0,0"  FontSize="14" Grid.Row="0" Grid.Column="0"/>
-        <TextBox x:Name="SpriteWidth" HorizontalAlignment="Left" Height="20" Margin="80,180,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" Grid.Row="0" Grid.Column="0" />
+        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Sprite Width" VerticalAlignment="Top" Margin="17,110,0,0"  FontSize="12" Grid.Row="0" Grid.Column="0"/>
+        <TextBox x:Name="SpriteWidth" HorizontalAlignment="Left" Margin="90,110,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="30" Height="18" Grid.Row="0" Grid.Column="0"/>
 
-        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Height" VerticalAlignment="Top" Margin="30,210,0,0"  FontSize="14" Grid.Row="0" Grid.Column="0"/>
-        <TextBox x:Name="SpriteHeight" HorizontalAlignment="Left" Height="20" Margin="80,210,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" Grid.Row="0" Grid.Column="0" />
+        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="Sprite Height" VerticalAlignment="Top" Margin="17,141,0,0"  FontSize="12" Grid.Row="0" Grid.Column="0"/>
+        <TextBox x:Name="SpriteHeight" HorizontalAlignment="Left"  Margin="90,141,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="30" Height="18" Grid.Row="0" Grid.Column="0"/>
 
-        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="OffsetX" VerticalAlignment="Top" Margin="30,240,0,0"  FontSize="14" Grid.Row="0" Grid.Column="0"/>
-        <TextBox x:Name="OffsetX" HorizontalAlignment="Left" Height="20" Margin="80,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" Grid.Row="0" Grid.Column="0" />
+        <Button x:Name="ApplyButton" Content="Apply" HorizontalAlignment="Left" Margin="30,170,0,0" VerticalAlignment="Top" Width="90" Click="ApplyButtonClick" Height="25"/>
 
-        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="OffsetY" VerticalAlignment="Top" Margin="30,270,0,0"  FontSize="14" Grid.Row="0" Grid.Column="0"/>
-        <TextBox x:Name="OffsetY" HorizontalAlignment="Left" Height="20" Margin="80,270,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="40" Grid.Row="0" Grid.Column="0" />
+        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="OffsetX" VerticalAlignment="Top" Margin="30,210,0,0"  FontSize="14" Grid.Row="0" Grid.Column="0"/>
+        <TextBox x:Name="OffsetX" HorizontalAlignment="Left" Margin="80,210,0,0" TextWrapping="Wrap" Text="{Binding ElementName=OffsetXSlider,Path=Value}" VerticalAlignment="Top" Width="35" Height="18" Grid.Row="0" Grid.Column="0" />
+        <Slider x:Name="OffsetXSlider" HorizontalAlignment="Left" Height="20" Margin="20,230,0,0"  VerticalAlignment="Top" Width="120" Grid.Row="0" Grid.Column="0" IsSnapToTickEnabled="True" ValueChanged="OffsetValueChanged"/>
 
-        <Button x:Name="ApplyButton" Content="Apply" HorizontalAlignment="Left" Margin="30,320,0,0" VerticalAlignment="Top" Width="100" Click="ApplyButtonClick" Height="30"/>
-        <Button x:Name="SplitButton" Content="Split" HorizontalAlignment="Left" Margin="30,370,0,0" VerticalAlignment="Top" Width="100" Click="SplitButtonClick" Height="30"/>
+        <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="OffsetY" VerticalAlignment="Top" Margin="30,260,0,0"  FontSize="14" Grid.Row="0" Grid.Column="0"/>
+        <TextBox x:Name="OffsetY" HorizontalAlignment="Left" Margin="80,260,0,0" TextWrapping="Wrap" Text="{Binding ElementName=OffsetYSlider,Path=Value}" VerticalAlignment="Top" Width="35" Height="18" Grid.Row="0" Grid.Column="0" />
+        <Slider x:Name="OffsetYSlider" HorizontalAlignment="Left" Height="20" Margin="20,280,0,0"  VerticalAlignment="Top" Width="120" Grid.Row="0" Grid.Column="0" IsSnapToTickEnabled="True" ValueChanged="OffsetValueChanged"/>
+
+        <TextBlock x:Name="ColumnInfo" HorizontalAlignment="Left" Text="Columns: 0" VerticalAlignment="Top" Margin="30,310,0,0" FontSize="12" Grid.Row="0" Grid.Column="0" Foreground="#FF6E6E6E"/>
+        <TextBlock x:Name="RowInfo" HorizontalAlignment="Left" Text="Rows: 0" VerticalAlignment="Top" Margin="30,330,0,0" FontSize="12" Grid.Row="0" Grid.Column="0" Foreground="#FF6E6E6E"/>
+        <TextBlock x:Name="SpritesCountInfo" HorizontalAlignment="Left" Text="Count: 0" VerticalAlignment="Top" Margin="30,350,0,0" FontSize="12" Grid.Row="0" Grid.Column="0" Foreground="#FF6E6E6E"/>
+
+        <Button x:Name="SplitButton" Content="Split" HorizontalAlignment="Left" Margin="30,380,0,0" VerticalAlignment="Top" Width="90" Click="SplitButtonClick" Height="25"/>
     </Grid>
 
 </Window>
