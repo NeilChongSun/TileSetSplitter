@@ -1,19 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Forms;
-
 
 namespace TileSetSplitter
 {
@@ -67,6 +53,8 @@ namespace TileSetSplitter
         {
             cropper.Crop(tileSet);
             SubWindow subWindow = new SubWindow(cropper);
+            subWindow.Height = tileSet.height * 1.5;
+            subWindow.Width = tileSet.width * 2.5;
             subWindow.Show();
         }
 
@@ -89,7 +77,6 @@ namespace TileSetSplitter
 
             ElementsIsEnable(false);
         }
-
 
         //Apply all input values: sprite height, sprite width, offsetX, offsetY
         private void ApplyValue()
@@ -115,7 +102,5 @@ namespace TileSetSplitter
             OffsetYSlider.IsEnabled = isEnable;
             SplitButton.IsEnabled = isEnable;
         }
-
     }
-
 }

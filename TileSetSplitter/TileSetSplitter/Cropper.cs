@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
@@ -10,7 +7,6 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Forms;
 using System.IO;
-using System.Windows.Controls.Primitives;
 
 namespace TileSetSplitter
 {
@@ -79,7 +75,7 @@ namespace TileSetSplitter
             spriteWidth = SafetyParse(inputWidth);
             spriteHeight = SafetyParse(inputHeight);
 
-            if (spriteHeight==0||spriteWidth==0)
+            if (spriteHeight == 0 || spriteWidth == 0)
             {
                 columns = 0;
                 rows = 0;
@@ -99,16 +95,24 @@ namespace TileSetSplitter
             fileDialog.Filter = "Image Files|*.png";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
+                string fileName = fileDialog.FileName;
+                if (System.IO.Path.HasExtension(fileName))
+                {
+                    string filePath = System.IO.Path.GetDirectoryName(fileName);
+                    string fileNameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension(fileName);
+                    fileName = System.IO.Path.Combine(filePath, fileNameWithoutExtension);
+                }
+
                 for (int i = 0; i < selectedImages.Count; i++)
                 {
-                    FileStream stream = new FileStream(fileDialog.FileName + "_" + i.ToString() + ".png", FileMode.CreateNew);
+                    FileStream stream = new FileStream(fileName + "_" + i.ToString() + ".png", FileMode.CreateNew);
                     PngBitmapEncoder encoder = new PngBitmapEncoder();
                     encoder.Frames.Add(BitmapFrame.Create(croppedBitmaps[i]));
                     encoder.Save(stream);
                     stream.Close();
                 }
+                System.Windows.MessageBox.Show("Done!", "Export", MessageBoxButton.OK,MessageBoxImage.Information);
             }
-            //System.Windows.MessageBox.Show("Done", "Export", MessageBoxButton.OK);
         }
 
         //Parse input value to integer in a safe way in case the input is not a integer

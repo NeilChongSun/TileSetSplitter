@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -55,7 +50,6 @@ namespace TileSetSplitter
             ExportTileSet(bitmap);
         }
 
-
         private void ExportTileSet(RenderTargetBitmap bitmap)
         {
             SaveFileDialog fileDialog = new SaveFileDialog();
@@ -67,8 +61,8 @@ namespace TileSetSplitter
                 encoder.Frames.Add(BitmapFrame.Create(bitmap));
                 encoder.Save(stream);
                 stream.Close();
+                System.Windows.MessageBox.Show("Done!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            //System.Windows.MessageBox.Show("Done","Export",MessageBoxButton.OK);
         }
 
         private int GetIndex(int x, int y)
