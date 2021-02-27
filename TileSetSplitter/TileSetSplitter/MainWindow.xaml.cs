@@ -28,23 +28,27 @@ namespace TileSetSplitter
         public MainWindow()
         {
             InitializeComponent();
+            Reset();
         }
 
         private void ImportButtonClick(object sender, RoutedEventArgs e)
         {
-            tileSet.ImportTileSet();
+            Reset();
+            if (tileSet.ImportTileSet())
+            {
+                double width = tileSet.width;
+                double height = tileSet.height;
 
-            double width = tileSet.width;
-            double height = tileSet.height;
-
-            Canvas.Width = tileSet.width;
-            TileSetWidthInfo.Text = "Image Width: " + (int)width;
-            OffsetXSlider.Maximum = (int)width;
-            Canvas.Height = height;
-            TileSetHeightInfo.Text = "Image Height: " + (int)width;
-            OffsetYSlider.Maximum = (int)height;
-            preViewImage.Source = tileSet.bitmap;
-            Canvas.Children.Add(preViewImage);
+                Canvas.Width = width;
+                Canvas.Height = height;
+                OffsetXSlider.Maximum = (int)width;
+                OffsetYSlider.Maximum = (int)height;
+                TileSetWidthInfo.Text = "Image Width: " + (int)width;
+                TileSetHeightInfo.Text = "Image Height: " + (int)height;
+                preViewImage.Source = tileSet.bitmap;
+                Canvas.Children.Add(preViewImage);
+                ElementsIsEnable(true);
+            }
         }
 
         private void ApplyButtonClick(object sender, RoutedEventArgs e)
@@ -54,6 +58,8 @@ namespace TileSetSplitter
 
         private void OffsetValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            OffsetX.Text = OffsetXSlider.Value.ToString();
+            OffsetY.Text = OffsetYSlider.Value.ToString();
             ApplyValue();
         }
 
@@ -64,16 +70,26 @@ namespace TileSetSplitter
             subWindow.Show();
         }
 
-        private void NewButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        //Reset all data
+        //Reset all datas
         private void Reset()
         {
+            tileSet = new TileSet();
+            preViewImage = new Image();
+            cropper = new Cropper();
+            SpriteHeight.Text = "0";
+            SpriteWidth.Text = "0";
+            OffsetXSlider.Value = 0;
+            OffsetYSlider.Value = 0;
+            Canvas.Width = 0;
+            Canvas.Height = 0;
+            RowInfo.Text = "Rows: 0";
+            ColumnInfo.Text = "Columns: 0";
+            SpritesCountInfo.Text = "Count: 0";
+            Canvas.Children.Clear();
 
+            ElementsIsEnable(false);
         }
+
 
         //Apply all input values: sprite height, sprite width, offsetX, offsetY
         private void ApplyValue()
@@ -86,6 +102,20 @@ namespace TileSetSplitter
             Canvas.Children.Add(preViewImage);
             cropper.DrawCropLine(ref Canvas);
         }
+
+        //Set all buttons and textbox is enable
+        void ElementsIsEnable(bool isEnable)
+        {
+            SpriteWidth.IsEnabled = isEnable;
+            SpriteHeight.IsEnabled = isEnable;
+            ApplyButton.IsEnabled = isEnable;
+            OffsetX.IsEnabled = isEnable;
+            OffsetY.IsEnabled = isEnable;
+            OffsetXSlider.IsEnabled = isEnable;
+            OffsetYSlider.IsEnabled = isEnable;
+            SplitButton.IsEnabled = isEnable;
+        }
+
     }
 
 }

@@ -16,14 +16,14 @@ namespace TileSetSplitter
 {
     public class Cropper
     {
-        public int columns;
-        public int rows;
+        public int columns = 0;
+        public int rows = 0;
 
-        public int spriteWidth;
-        public int spriteHeight;
-        
-        private int offsetX;
-        private int offsetY;
+        public int spriteWidth = 0;
+        public int spriteHeight = 0;
+
+        private int offsetX = 0;
+        private int offsetY = 0;
 
         public List<CroppedBitmap> croppedBitmaps = new List<CroppedBitmap>();
         public List<ImageSource> selectedImages = new List<ImageSource>();
@@ -43,7 +43,7 @@ namespace TileSetSplitter
 
         public void DrawCropLine(ref Canvas canvas)
         {
-            //Drwa vertical lines
+            //Drwa horizontal lines
             for (int row = 0; row <= rows; row++)
             {
                 Line verticalLine = new Line();
@@ -54,11 +54,11 @@ namespace TileSetSplitter
                 verticalLine.Y1 = row * spriteHeight + offsetY;
                 verticalLine.X2 = columns * spriteWidth + offsetX;
                 verticalLine.Y2 = row * spriteHeight + offsetY;
-                
+
                 canvas.Children.Add(verticalLine);
             }
 
-            //Draw horizontal lines
+            //Draw vertical lines
             for (int column = 0; column <= columns; column++)
             {
                 Line horizontalLine = new Line();
@@ -68,7 +68,7 @@ namespace TileSetSplitter
                 horizontalLine.X1 = column * spriteWidth + offsetX;
                 horizontalLine.Y1 = 0 + offsetY;
                 horizontalLine.X2 = column * spriteWidth + offsetX;
-                horizontalLine.Y2 = rows * spriteWidth + offsetY;
+                horizontalLine.Y2 = rows * spriteHeight + offsetY;
 
                 canvas.Children.Add(horizontalLine);
             }
@@ -76,14 +76,21 @@ namespace TileSetSplitter
 
         public void ApplyValue(TileSet tileSet, string inputWidth, string inputHeight, string inputOffsetX, string inputOffsetY)
         {
-            spriteWidth = Int32.Parse(inputWidth);
-            spriteHeight = Int32.Parse(inputHeight);
+            spriteWidth = SafetyParse(inputWidth);
+            spriteHeight = SafetyParse(inputHeight);
 
-            offsetX = Int32.Parse(inputOffsetX);
-            offsetY = Int32.Parse(inputOffsetY);
+            if (spriteHeight==0||spriteWidth==0)
+            {
+                columns = 0;
+                rows = 0;
+                return;
+            }
+
+            offsetX = SafetyParse(inputOffsetX);
+            offsetY = SafetyParse(inputOffsetY);
 
             columns = (int)((tileSet.width - offsetX) / spriteWidth);
-            rows = (int)((tileSet.height - offsetY) / spriteWidth);
+            rows = (int)((tileSet.height - offsetY) / spriteHeight);
         }
 
         public void ExportSprites()
@@ -101,7 +108,22 @@ namespace TileSetSplitter
                     stream.Close();
                 }
             }
-            System.Windows.MessageBox.Show("Done");
+            //System.Windows.MessageBox.Show("Done", "Export", MessageBoxButton.OK);
+        }
+
+        //Parse input value to integer in a safe way in case the input is not a integer
+        private int SafetyParse(string input)
+        {
+            int result = 0;
+            if (Int32.TryParse(input, out result))
+            {
+                if (result >= 0)
+                {
+                    return result;
+                }
+            }
+            System.Windows.MessageBox.Show("The input value must be a positive integer!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return 0;
         }
     }
 }

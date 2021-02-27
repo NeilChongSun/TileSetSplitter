@@ -68,7 +68,7 @@ namespace TileSetSplitter
                 encoder.Save(stream);
                 stream.Close();
             }
-            System.Windows.MessageBox.Show("Done");
+            //System.Windows.MessageBox.Show("Done","Export",MessageBoxButton.OK);
         }
 
         private int GetIndex(int x, int y)

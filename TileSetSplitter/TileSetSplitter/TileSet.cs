@@ -17,7 +17,7 @@ namespace TileSetSplitter
         
         public BitmapImage bitmap = new BitmapImage();
 
-        public void ImportTileSet()
+        public bool ImportTileSet()
         {
             bitmap = new BitmapImage();
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -27,7 +27,10 @@ namespace TileSetSplitter
             {
                 path = fileDialog.FileName;
                 LoadTileSet();
+                return true;
             }
+            else
+                return false;
         }
 
 

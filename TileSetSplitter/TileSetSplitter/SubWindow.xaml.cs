@@ -68,6 +68,11 @@ namespace TileSetSplitter
 
         private void ExportSpritesButtonClick(object sender, RoutedEventArgs e)
         {
+            if (SelectedSprites.Children.Count==0)
+            {
+                MessageBox.Show("There is nothing to exporte!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             cropper.selectedImages.Clear();
             foreach(Image image in SelectedSprites.Children)
             {
@@ -78,6 +83,11 @@ namespace TileSetSplitter
 
         private void ExportTileSetButtonClick(object sender, RoutedEventArgs e)
         {
+            if (SelectedSprites.Children.Count == 0)
+            {
+                System.Windows.MessageBox.Show("There is nothing to exporte!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             combiner.MergeSprites(SelectedSprites,cropper);
         }
 

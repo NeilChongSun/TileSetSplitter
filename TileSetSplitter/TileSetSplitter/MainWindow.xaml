@@ -28,11 +28,11 @@
 
         <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="OffsetX" VerticalAlignment="Top" Margin="30,210,0,0"  FontSize="14" Grid.Row="0" Grid.Column="0"/>
         <TextBox x:Name="OffsetX" HorizontalAlignment="Left" Margin="80,210,0,0" TextWrapping="Wrap" Text="{Binding ElementName=OffsetXSlider,Path=Value}" VerticalAlignment="Top" Width="35" Height="18" Grid.Row="0" Grid.Column="0" />
-        <Slider x:Name="OffsetXSlider" HorizontalAlignment="Left" Height="20" Margin="20,230,0,0"  VerticalAlignment="Top" Width="120" Grid.Row="0" Grid.Column="0" IsSnapToTickEnabled="True" ValueChanged="OffsetValueChanged"/>
+        <Slider x:Name="OffsetXSlider" HorizontalAlignment="Left" Height="20" Margin="20,230,0,0"  VerticalAlignment="Top" Width="120" Grid.Row="0" Grid.Column="0" IsSnapToTickEnabled="True" ValueChanged="OffsetValueChanged" Maximum="0"/>
 
         <TextBlock  HorizontalAlignment="Left" TextWrapping="Wrap" Text="OffsetY" VerticalAlignment="Top" Margin="30,260,0,0"  FontSize="14" Grid.Row="0" Grid.Column="0"/>
         <TextBox x:Name="OffsetY" HorizontalAlignment="Left" Margin="80,260,0,0" TextWrapping="Wrap" Text="{Binding ElementName=OffsetYSlider,Path=Value}" VerticalAlignment="Top" Width="35" Height="18" Grid.Row="0" Grid.Column="0" />
-        <Slider x:Name="OffsetYSlider" HorizontalAlignment="Left" Height="20" Margin="20,280,0,0"  VerticalAlignment="Top" Width="120" Grid.Row="0" Grid.Column="0" IsSnapToTickEnabled="True" ValueChanged="OffsetValueChanged"/>
+        <Slider x:Name="OffsetYSlider" HorizontalAlignment="Left" Height="20" Margin="20,280,0,0"  VerticalAlignment="Top" Width="120" Grid.Row="0" Grid.Column="0" IsSnapToTickEnabled="True" ValueChanged="OffsetValueChanged" Maximum="0"/>
 
         <TextBlock x:Name="ColumnInfo" HorizontalAlignment="Left" Text="Columns: 0" VerticalAlignment="Top" Margin="30,310,0,0" FontSize="12" Grid.Row="0" Grid.Column="0" Foreground="#FF6E6E6E"/>
         <TextBlock x:Name="RowInfo" HorizontalAlignment="Left" Text="Rows: 0" VerticalAlignment="Top" Margin="30,330,0,0" FontSize="12" Grid.Row="0" Grid.Column="0" Foreground="#FF6E6E6E"/>
